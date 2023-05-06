@@ -1,7 +1,7 @@
 {
   "name": "api-intranet",
   "version": "1.0.0",
-  "description": "",
+  "description": "overload of the epitech intranet API",
   "main": "index.js",
   "type": "module",
   "scripts": {
