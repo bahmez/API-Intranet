@@ -119,7 +119,10 @@ export async function setPhoneNumber(id, number) {
         await setTimeout(5000);
         if (!page.url().includes("https://intra.epitech.eu/"))
             return {error: "invalidConnection"};
-        const cookie = await page.cookies();
+        let cookie = await page.cookies();
+        await page.goto("https://my.epitech.eu/");
+        await setTimeout(5000);
+        cookie = [...cookie, await page.cookies()];
         await deleteSession(id);
         return {valid: 1, cookie};
     } catch (error) {
