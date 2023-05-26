@@ -1,6 +1,3 @@
-import {JSDOM} from "jsdom";
-import {convertStringToDate} from "../utils/convertStringToDate.js";
-
 export async function getAllModules(cookie) {
     const opts = {
         headers: {
