@@ -24,3 +24,16 @@ export async function getAllActivityHub(cookie) {
     }
     return activities;
 }
+
+export async function getAllJamModules(cookie) {
+    const modules = getAllModules(cookie);
+    let array = [];
+
+    for (let i = 0; i < modules.length; i++) {
+        let title = modules[i].title;
+
+        if (title.includes("JAM"))
+            array.push(modules[i])
+    }
+    return array;
+}
