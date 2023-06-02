@@ -119,12 +119,14 @@ export async function setPhoneNumber(id, number) {
         await setTimeout(5000);
         if (!page.url().includes("https://intra.epitech.eu/"))
             return {error: "invalidConnection"};
-        let cookie = await page.cookies();
+        const cookie = await page.cookies();
         await page.goto("https://my.epitech.eu/");
         await setTimeout(5000);
-        cookie = [...cookie, await page.cookies()];
+        await page.click("a.mdl-button > .mdl-button__ripple-container");
+        await setTimeout(2000);
+        const token = await page.evaluate(() => window.localStorage["argos-api.oidc-token"].replaceAll('\"', ""));
         await deleteSession(id);
-        return {valid: 1, cookie};
+        return {valid: 1, cookie, token};
     } catch (error) {
         console.log(error);
         return {error: "internal", message: error};
