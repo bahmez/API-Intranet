@@ -10,10 +10,6 @@ start login sessions
 
 the status of the sessions
 
-```POST /LOGIN```
-
-Logins to the intranet
-
 ```GET /LOGIN/PHONE/{CODE}```
 
 send the phone code of the login
