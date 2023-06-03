@@ -47,10 +47,10 @@ async function getMicrosoftLink() {
 }
 
 export async function createConnectionSession(email, password) {
-    var json = {email, password, time: 5000, step: "login"};
+    let json = {email, password, time: 900, step: "login"};
     const browser = await puppeteer.launch({
         executablePath: 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
-        headless: true,
+        headless: "new",
         args: [
             `--window-size=1920,1080`,
             '--no-sandbox',
@@ -99,8 +99,8 @@ export async function createConnectionSession(email, password) {
 }
 
 export async function setPhoneNumber(id, number) {
+    if (!(id in sessions)) return {error: "notFound"};
     const json = sessions[id];
-    const browser = json["browser"];
     const page = json["page"];
 
     try {
