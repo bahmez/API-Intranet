@@ -65,7 +65,7 @@ export default function index(app) {
         }
         return response.status(200).json({
             currentXp: xp,
-            xpGoal:
+            xpGoal: 0
         })
     })
 }
