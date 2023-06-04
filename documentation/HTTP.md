@@ -105,7 +105,6 @@ Gets all the units of a user
 
 #### Parameters :
 
-* Current
 * All time
 * Year
 
@@ -113,7 +112,7 @@ Gets all the units of a user
 
 Gets the details of a specific unit
 
-```GET /UNITS/{ID}```\
+```GET /UNIT/{YEAR}/{CODE_MODULE}/{CODE_INSTANCE}```\
 Where ``ID`` is the id of the unit
 ``ID`` is optionnal, if not specified it will return the details of all units.
 
@@ -121,12 +120,12 @@ Where ``ID`` is the id of the unit
 
 Registers to a unit
 
-```GET /UNITS/{ID}/REGISTER```\
+```GET /UNIT/{YEAR}/{CODE_MODULE}/{CODE_INSTANCE}/REGISTER```\
 Where ``ID`` is the id of the unit
 
 ### Unregister from a unit
 
-```GET /UNITS/{ID}/UNREGISTER```\
+```GET /UNIT/{YEAR}/{CODE_MODULE}/{CODE_INSTANCE}/UNREGISTER```\
 Where ``ID`` is the id of the unit
 
 ## Projects :
