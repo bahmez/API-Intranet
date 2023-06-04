@@ -44,7 +44,7 @@ Gets the GPA of user
 
 Gets the informations related to logtime of user
 
-```GET /USER/NETSOULD/{PARAMETERS}```
+```GET /USER/NETSOUL/{PARAMETERS}```
 
 #### Parameters :
 
@@ -62,10 +62,6 @@ Gets the results of the units and grades of user
 
 #### Parameters :
 
-* All time
-* Year
-* Month
-* Week
 * semester number
 
 ### Flags :
@@ -78,19 +74,13 @@ Gets the flags of user
 
 Gets the partners of a user
 
-```GET /USER/PARTNERS/{PARAMETERS}```
+```GET /USER/PARTNERS```
 
-#### Parameters :
-
-* Year
-* Month
-* Week
-
-### Educationnal overview :
+### Educational overview :
 
 Gets details about ?? of a user
 
-```GET /USER/EDUCATIONNAL```
+```GET /USER/EDUCATIONAL```
 
 ### Absences :
 
@@ -104,7 +94,6 @@ Gets the absences of a user
 * Year
 * Month
 * Week
-* Unit ?
 
 ## Units :
 
