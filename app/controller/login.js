@@ -1,4 +1,5 @@
-import {createConnectionSession, setPhoneNumber} from "../model/login.js";
+import {createConnectionSession, getInformationLogin, setPhoneNumber} from "../model/login.js";
+import {setTimeout} from "timers/promises";
 
 export function socket(app) {
 
@@ -18,14 +19,27 @@ export default function index(app) {
         setTimeout(() => {
             delete login[token]
         }, 900000)
-        createConnectionSession(email, password).then(id => {
+        createConnectionSession(email, password).then(async id => {
             if ("error" in id) {
                 if (id["error"] === "invalidId")
                     login[token] = {code: 404, id};
                 else
                     login[token] = {code: 401, id};
             } else if ("valid" in id) {
-                login[token] = {code: 202, id: id["id"]};
+                login[token] = {code: 202, id: id["id"], pin: id["code"]};
+                if (id["code"] >= 0) {
+                    while (1) {
+                        let response = await getInformationLogin(id["id"]);
+                        if ("wait" in response)
+                            continue;
+                        if ("valid" in response) {
+                            login[token] = {code: 200, ...response};
+                        } else {
+                            login[token] = {code: 400, response};
+                        }
+                        break;
+                    }
+                }
             } else {
                 login[token] = {code: 400, id};
             }
