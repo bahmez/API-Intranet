@@ -9,7 +9,9 @@ export async function verifyToken(request, response, next) {
     if (!token) return response.status(403).json({"error": 1})
 
     try {
-        await getProfile(cookies);
+        let json = await getProfile(cookies);
+        response.locals.email = json["login"];
+        response.locals.location = json["location"];
         await getResults("2014", token);
     } catch (e) {
         return response.status(403).json({"error": 1})
