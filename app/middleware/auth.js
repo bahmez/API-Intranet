@@ -33,4 +33,5 @@ export function executeAuthMiddleware(app) {
     app.use('/notifications/', verifyToken)
     app.use('/alert/', verifyToken)
     app.use('/planning/', verifyToken)
+    app.use('/myepitech/', verifyToken)
 }

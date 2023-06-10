@@ -282,3 +282,25 @@ Gets the notifications of a user
 ```GET /PLANNING/{START}/{END}```\
 ``START`` departure date\
 ``END`` end date
+
+## MyEpitech :
+
+### Global Results :
+Gets all results by year
+
+```GET /MYEPITECH/{YEAR}```\
+``YEAR`` year of the result
+
+### details result :
+Gets details of the result
+
+```GET /MYEPITECH/details/{ID}```\
+``ID`` id of the result
+
+### project results:
+Gets all results of the project
+
+```GET /MYEPITECH/projects/{YEAR}/{MODULE_NAME}/{PROJECT_NAME}```\
+``YEAR`` year of the project
+``MODULE_NAME`` module name of the project
+``PROJECT_NAME`` name of the project
