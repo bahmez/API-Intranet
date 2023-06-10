@@ -197,7 +197,6 @@ Where ``PARAMETERS`` is optional
 #### Parameters :
 
 * Year
-* Last
 
 ### English units
 
@@ -205,13 +204,11 @@ Gets all the currently available units of english
 
 ```GET /ENGLISH/```
 
-### English projects
+### English activities
 
-Gets all the currently available project of a unit of english
+Gets all the currently available activities of a unit of english
 
-```GET /ENGLISH/PROJECTS/{ID}```\
-Where ``ID`` is the id of the unit\
-If no ``ID`` is specified returns all the available english projects
+```GET /ENGLISH/ACTIVITIES```\
 
 ## HUB :
 

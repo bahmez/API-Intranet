@@ -1,7 +1,7 @@
 import {getAllModules, getModuleInformation} from "./module.js";
 
 export async function getAllEnglishModules(cookie) {
-    const modules = getAllModules(cookie);
+    const modules = await getAllModules(cookie);
     let array = [];
 
     for (let i = 0; i < modules.length; i++) {
@@ -14,7 +14,7 @@ export async function getAllEnglishModules(cookie) {
 }
 
 export async function getAllTepitechModules(cookie) {
-    const modules = getAllModules(cookie);
+    const modules = await getAllModules(cookie);
     let array = [];
 
     for (let i = 0; i < modules.length; i++) {
@@ -27,25 +27,25 @@ export async function getAllTepitechModules(cookie) {
 }
 
 export async function getAllTepitechActivities(cookie) {
-    const modules = getAllTepitechModules(cookie);
+    const modules = await getAllTepitechModules(cookie);
     let activities = [];
 
     for (let i = 0; i < modules.length; i++) {
-        const info = getModuleInformation(modules[i].scolaryear, modules[i].code, modules[i].codeinstance, cookie);
+        const info = await getModuleInformation(modules[i].scolaryear, modules[i].code, modules[i].codeinstance, cookie);
 
-        activities.concat(info.activites);
+        activities = [...activities, ...info.activites];
     }
     return activities;
 }
 
 export async function getAllEnglishActivities(cookie) {
-    const modules = getAllEnglishModules(cookie);
+    const modules = await getAllEnglishModules(cookie);
     let activities = [];
 
     for (let i = 0; i < modules.length; i++) {
-        const info = getModuleInformation(modules[i].scolaryear, modules[i].code, modules[i].codeinstance, cookie);
+        const info = await getModuleInformation(modules[i].scolaryear, modules[i].code, modules[i].codeinstance, cookie);
 
-        activities.concat(info.activites);
+        activities = [...activities, ...info.activites];
     }
     return activities;
 }
