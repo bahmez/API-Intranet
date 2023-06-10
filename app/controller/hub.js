@@ -64,10 +64,35 @@ export default function index(app) {
         let jsonNotes = await getAllNoteInProfile(profile.internal_email, cookies);
         const currentHubName = profile.semester_code + " - Hub";
         let currentHub = jsonNotes.modules.filter(module => module.title === currentHubName);
+        let xpGoal = (currentHub) ? currentHub[0].credits : 0;
 
         return response.status(200).json({
             currentXp: xp,
-            xpGoal: currentHub[0].credits * 10
+            xpGoal: xpGoal * 10
+        })
+    })
+
+    app.get('/jam', async (request, response) => {
+        let cookies = request.headers.cookie;
+        let json = await getAllJamModules(cookies);
+        let validJams = 0;
+        let registeredJams = 0;
+        let failedJams = 0;
+
+        for (let i = 0; i < json.length; i++) {
+            if (json[i].status === 'valid') {
+                registeredJams++;
+                validJams++;
+            } else if (json[i].status === 'fail') {
+                registeredJams++;
+                failedJams++;
+            }
+        }
+
+        return response.status(200).json({
+            registeredJams: registeredJams,
+            failedJams: failedJams,
+            validJams: validJams
         })
     })
 }
