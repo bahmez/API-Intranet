@@ -48,6 +48,7 @@ async function getMicrosoftLink() {
 
 export async function createConnectionSession(email, password) {
     let json = {email, password, time: 900, step: "login"};
+    let code = -1;
     const browser = await puppeteer.launch({
         executablePath: 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
         headless: "new",
@@ -83,19 +84,51 @@ export async function createConnectionSession(email, password) {
         await setTimeout(1000);
         await page.click("#submitButton");
         await setTimeout(5000);
-        var validId = await page.evaluate(() => {
-            return (document.querySelector("div.table[data-value=OneWaySMS]") !== null);
+        let isAuthenticator = await page.evaluate(() => {
+            if (document.getElementById("idRichContext_DisplaySign") === null)
+                return undefined;
+            return document.getElementById("idRichContext_DisplaySign").innerText;
         })
-        await page.click("div.table[data-value=OneWaySMS]");
-        if (!validId)
-            return {error: "invalidId"};
+        if (isAuthenticator === undefined) {
+            let validId = await page.evaluate(() => {
+                return (document.querySelector("div.table[data-value=OneWaySMS]") !== null);
+            })
+            if (!validId)
+                return {error: "invalidId"};
+            await page.click("div.table[data-value=OneWaySMS]");
+        }
         json["page"] = page;
+        code = (isAuthenticator !== undefined) ? isAuthenticator : code;
     } catch (error) {
         console.log(error);
         return {error: "internal", message: error};
     }
     let id = sessions.push(json) - 1;
-    return {valid: 1, id};
+    return {valid: 1, id, code};
+}
+export async function getInformationLogin(id) {
+    if (!(id in sessions)) return {error: "notFound"};
+    const json = sessions[id];
+    const page = json["page"];
+
+    try {
+        await page.waitForSelector('input#idBtn_Back[type=button]');
+        await page.click("input#idBtn_Back[type=button]");
+        await setTimeout(5000);
+        if (!page.url().includes("https://intra.epitech.eu/"))
+            return {error: "invalidConnection"};
+        const cookie = await page.cookies();
+        await page.goto("https://my.epitech.eu/");
+        await setTimeout(5000);
+        await page.click("a.mdl-button > .mdl-button__ripple-container");
+        await setTimeout(2000);
+        const token = await page.evaluate(() => window.localStorage["argos-api.oidc-token"].replaceAll('\"', ""));
+        await deleteSession(id);
+        return {valid: 1, cookie, token};
+    } catch (e) {
+        console.log(e);
+        return {error: "internal", message: e};
+    }
 }
 
 export async function setPhoneNumber(id, number) {
@@ -108,7 +141,7 @@ export async function setPhoneNumber(id, number) {
         await setTimeout(1000);
         await page.click("input[type=submit]");
         await setTimeout(5000);
-        var validId = await page.evaluate(() => {
+        let validId = await page.evaluate(() => {
             return (document.querySelector("#ProofUpDescription") !== null);
         })
         if (validId) {

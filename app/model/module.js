@@ -24,6 +24,18 @@ export async function getModuleInformation(scolarYear, code, codeInstance, cooki
     return result.json();
 }
 
+export async function getActivity(scolarYear, code, codeInstance, codeActivity, cookie) {
+    const opts = {
+        headers: {
+            cookie: cookie
+        }
+    };
+    const result = await fetch("https://intra.epitech.eu/module/" + scolarYear + "/" + code + "/" + codeInstance + "/" + codeActivity + "/?format=json", opts)
+    if (result.statusCode >= 400)
+        throw "error code : " + result.statusCode;
+    return result.json();
+}
+
 export async function getProjectInformation(scolarYear, code, codeInstance, codeActivity, cookie) {
     const opts = {
         headers: {
