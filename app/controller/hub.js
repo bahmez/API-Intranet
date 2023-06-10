@@ -1,5 +1,5 @@
-import {getAllActivityHubByYear, getAllHubModules, getAllJamModules} from "../model/hub.js"
-import {getProfile} from "../model/profile.js";
+import {getAllActivityHubByYear, getAllJamModules} from "../model/hub.js"
+import {getAllNoteInProfile, getProfile} from "../model/profile.js";
 
 const xpValues = [
     {
@@ -53,8 +53,6 @@ export default function index(app) {
                 else if (json[i].type_title === 'Experience')
                     xpData = xpValues[3];
 
-                console.log(json[i]);
-
                 if (status === 'absent')
                     xp -= xpData.xpLostPart;
                 else if (status === 'organisateur')
@@ -63,9 +61,13 @@ export default function index(app) {
                     xp += xpData.xpWinPart;
             }
         }
+        let jsonNotes = await getAllNoteInProfile(profile.internal_email, cookies);
+        const currentHubName = profile.semester_code + " - Hub";
+        let currentHub = jsonNotes.modules.filter(module => module.title === currentHubName);
+
         return response.status(200).json({
             currentXp: xp,
-            xpGoal: 0
+            xpGoal: currentHub[0].credits * 10
         })
     })
 }
