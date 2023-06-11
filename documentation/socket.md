@@ -76,5 +76,4 @@ getAdministrationResource -> command to retrieve administration resource by the 
 Catégorie notification :
 
 
-getNotifications -> command that leads to a page where all the notifications are filled in\
-getRecentNotifications -> command to retrieve all recent notifications
+getNotifications -> command that leads to a page where all the notifications are filled in
