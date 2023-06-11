@@ -52,6 +52,8 @@ export function socket(app) {
                     xpData = xpValues[1];
                 else if (json[i].type_title === 'Hackaton')
                     xpData = xpValues[2];
+                else if (json[i].type_title === 'Hackathon')
+                    xpData = xpValues[2];
                 else if (json[i].type_title === 'Experience')
                     xpData = xpValues[3];
 
@@ -63,8 +65,9 @@ export function socket(app) {
                     xp += xpData.xpWinPart;
             }
         }
+        let currentYear = profile.studentyear - (parseInt(profile.scolaryear) - year);
         let jsonNotes = await getAllNoteInProfile(profile.internal_email, cookies);
-        const currentHubName = profile.semester_code + " - Hub";
+        const currentHubName = 'B' + currentYear * 2 + " - Hub";
         let currentHub = jsonNotes.modules.filter(module => module.title === currentHubName);
         let xpGoal = (currentHub) ? currentHub[0].credits : 0;
 
@@ -121,6 +124,8 @@ export default function index(app) {
                     xpData = xpValues[1];
                 else if (json[i].type_title === 'Hackaton')
                     xpData = xpValues[2];
+                else if (json[i].type_title === 'Hackathon')
+                    xpData = xpValues[2];
                 else if (json[i].type_title === 'Experience')
                     xpData = xpValues[3];
 
@@ -132,8 +137,9 @@ export default function index(app) {
                     xp += xpData.xpWinPart;
             }
         }
+        let currentYear = profile.studentyear - (parseInt(profile.scolaryear) - year);
         let jsonNotes = await getAllNoteInProfile(profile.internal_email, cookies);
-        const currentHubName = profile.semester_code + " - Hub";
+        const currentHubName = 'B' + currentYear * 2 + " - Hub";
         let currentHub = jsonNotes.modules.filter(module => module.title === currentHubName);
         let xpGoal = (currentHub) ? currentHub[0].credits : 0;
 
