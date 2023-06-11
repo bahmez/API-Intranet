@@ -27,7 +27,6 @@ catégorie profil :
 getGPA -> command to retrieve gpa value\
 getActualCredits -> command to retrieve the current number of credits\
 getAvailableCredits -> command to retrieve the number of available credits\
-getGoalCredits -> command to retrieve the number of total credits to have\
 getLogTime -> command to retrieve 'logtime' time
 
 * weekly -> online time of the week
@@ -35,19 +34,10 @@ getLogTime -> command to retrieve 'logtime' time
 * yearly -> online time of the year
 * custom -> online time between two chosen dates
 
-getNotes -> command to retrieve all notes
-* year -> all notes for a specific year
-* module -> all notes of a module
-* activity -> all notes for a specific activity (reviews / english ect...)
-
-getGrades -> command to retrieve all grades of each module\
+getNotes -> command to retrieve all notes\
 getFlags -> command to retrieve all flags obtains\
-getFlagInfo -> command to see the description of the flag\
 getAbsences -> command to retrieve all absences\
-getRecentAbsences -> command to retrieve all recent absences\
 getDocuments -> command to retrieve all documents\
-openDocument -> command to open a document\
-getProfilePicture -> command to retrieve the student's profile picture
 
 
 Catégorie results :
