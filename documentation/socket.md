@@ -64,11 +64,7 @@ getEnglishActivities -> command to retrieve all english activities
 Catégorie e-learning :
 
 
-selectElearningYear -> command to select preview year in the e-learning page\
-selectElearningSemester -> command to select preview semester in the e-learning page\
-selectElearningModule -> command to select preview module in the e-learning page\
-selectElearningNotion -> command to select preview notion in the e-learning page\
-getElearningNotionVideos -> command to retrieve all the videos available for the category of a notion of a module
+getVideos -> command to select preview year in the e-learning page
 
 
 Catégorie adminastration :
