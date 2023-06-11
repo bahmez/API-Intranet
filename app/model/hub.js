@@ -28,9 +28,10 @@ export async function getAllActivityHub(cookie) {
 export async function getAllActivityHubByYear(year, cookie) {
     const modules = await getAllHubModules(cookie);
     let activities = [];
+    let numYear = parseInt(year);
 
     for (let i = 0; i < modules.length; i++) {
-        if (year !== modules[i].scolaryear)
+        if (numYear !== modules[i].scolaryear)
             continue;
         const info = await getModuleInformation(modules[i].scolaryear, modules[i].code, modules[i].codeinstance, cookie);
 
