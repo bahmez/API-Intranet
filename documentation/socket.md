@@ -50,15 +50,7 @@ Catégorie hub :
 
 
 getHubXP -> command to see how many xp are validated\
-getHubGoal -> command to see the objective of the number of xp to validate\
-setHubGoal -> command to set the objective of the number of xp to validate\
-getHubXPInProgress -> command to see the number of xp being validated (registration of the schedule)\
-getHubXPMissing -> command to see the number of xp missing to achieve the goal\
-getHubAttendances -> command to see the number of attendances in hub activity\
-getHubAbsences -> command to see the number of absences in hub activity\
-getHubActivities -> command to see hub activity organizations\ 
 getJam -> command to see jam activities\
-getJamResults -> command to retrieve all jam result
 
 
 Catégorie anglais :
