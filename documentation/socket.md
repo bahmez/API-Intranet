@@ -2,7 +2,8 @@ catégorie connexion :
 
 [CLIENT -> SERVER]
 
-* login -> start session / send phone code \
+* loginStart -> start session
+* loginPhone -> send phone number
 
 [SERVER -> CLIENT]
 * login -> each 5s the server send the information of the login session
