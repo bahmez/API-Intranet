@@ -1,6 +1,44 @@
 import {getAllRoadBlock, getAllRoadBlockByYear} from "../model/roadBlock.js";
 import {getAllModules} from "../model/module.js";
+import {isValidObject} from "../utils/isValidObject.js";
 
+
+export function socket(app) {
+    app.on("getRoadblocks", async (response) => {
+        if (!isValidObject(app, response, true)) return app.emit("getRoadblocks", {"error": "you must be logged in"});
+
+        let year = response.year;
+
+        if (year === undefined) return app.emit("getRoadblocks", {"error": "bad argument"});
+
+        let roadblocks = await getAllRoadBlockByYear(year, response.cookie);
+        let results = [];
+        let modules = await getAllModules(response.cookie);
+
+        roadblocks.forEach((roadblock) => {
+            let result = {
+                scholarYear: roadblock.scolaryear,
+                codeModule: roadblock.codemodule,
+                codeInstance: roadblock.codeinstance,
+                title: roadblock.title
+            }
+            let modulesInfo = getAllModuleRequired(roadblock.description);
+            let modulesRoadBlock = [];
+            modules.forEach((module) => {
+                for (let i = 0; i < modulesInfo.length; i++) {
+                    if (!modulesInfo[i].includes(module.code))
+                        continue;
+                    modulesRoadBlock.push(module);
+                }
+            })
+            let creditsRequired = getCreditRequired(roadblock.description);
+            result["modulesRequired"] = modulesRoadBlock;
+            result["creditsRequired"] = creditsRequired;
+            results.push(result);
+        })
+        return app.emit("getRoadblocks", results);
+    })
+}
 
 function getAllModuleRequired(description) {
     let modules = [];
