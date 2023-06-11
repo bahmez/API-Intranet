@@ -46,6 +46,7 @@ export function socket(app) {
         return app.emit("getModules", units);
     })
     app.on("getModuleInfo", async (response) => {
+        if (!isValidObject(app, response, true)) return app.emit("getModuleInfo", {"error": "you must be logged in"});
         let year = response.year;
         let codeModule = response.code_module;
         let codeInstance = response.code_instance;
@@ -102,6 +103,8 @@ export function socket(app) {
         });
     })
     app.on("getProjects", async (response) => {
+        if (!isValidObject(app, response, true)) return app.emit("getProjects", {"error": "you must be logged in"});
+
         let cookies = app.cookie;
         let year = response.year;
         let codeModule = response.code_module;
@@ -158,6 +161,8 @@ export function socket(app) {
         });
     })
     app.on("getProjectInfo", async (response) => {
+        if (!isValidObject(app, response, true)) return app.emit("getProjectInfo", {"error": "you must be logged in"});
+
         let cookies = response.cookie;
         let year = response.year;
         let codeModule = response.code_module;
