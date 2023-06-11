@@ -1,7 +1,10 @@
 import {getAllModules, getModuleInformation, registerInModule, unregisterInModule} from "../model/module.js";
+import {isValidObject} from "../utils/isValidObject.js";
 
 export function socket(app) {
     app.on("registerModule", async (response) => {
+        if (!isValidObject(app, response, true)) return app.emit("registerModule", {"error": "you must be logged in"});
+
         let cookies = response.cookie;
         let year = response.year;
         let codeModule = response.code_module;
@@ -17,6 +20,8 @@ export function socket(app) {
         return app.emit("registerModule", json)
     })
     app.on("unRegisterModule", async (response) => {
+        if (!isValidObject(app, response, true)) return app.emit("unRegisterModule", {"error": "you must be logged in"});
+
         let cookies = response.cookie;
         let year = response.year;
         let codeModule = response.code_module;
