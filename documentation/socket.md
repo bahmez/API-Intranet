@@ -40,21 +40,6 @@ getAbsences -> command to retrieve all absences\
 getDocuments -> command to retrieve all documents\
 
 
-Catégorie results :
-
-
-selectResultYear -> command to select preview year in the result page\
-selectResultModule -> command to select the module\
-getResultProject -> command to retrieve the results of a project\
-getResultDate -> commande to retrieve the date of the result\
-getResultStatus -> commande to retrieve the status of a project (delivery error / crash ect...)\
-getResultPercentage -> commande to retrieve the percentage of a project\
-getResultCodingStyle -> commande to retrieve "Coding style" informations of a project\
-getResultCoverage -> commande to retrieve coverage informations of a project\
-getResultDetails -> command to retrieve the result details of a project\
-getResultHistory -> command to retrieve the results history of a project
-
-
 Catégorie roadblock :
 
 
