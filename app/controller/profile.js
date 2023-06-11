@@ -24,7 +24,8 @@ export function socket(app) {
         if (!isValidObject(app, response, true)) return app.emit("getAvailableCredits", {"error": "you must be logged in"});
         let availableCredits = 0;
 
-        let json = await getAllNoteInProfile(response.locals.email, response.cookie);
+        if (response.email === undefined) return app.emit("getAvailableCredits", {"error": "bad argument"});
+        let json = await getAllNoteInProfile(response.email, response.cookie);
         json["modules"].forEach((module, index) => {
             if (module["grade"] !== '-')
                 return;
@@ -37,6 +38,7 @@ export function socket(app) {
         let date = response.date;
         let day = 0;
 
+        if (response.email === undefined) return app.emit("getLogTime", {"error": "bad argument"});
         if (date === undefined) return app.emit("getLogTime", {"error": "bad argument"});
         switch (date) {
             case "year":
@@ -49,7 +51,7 @@ export function socket(app) {
                 day = 7;
                 break;
         }
-        let json = await getNetsoulInProfile(response.locals.email, app.cookie);
+        let json = await getNetsoulInProfile(response.email, app.cookie);
         return app.emit("getLogTime", json.slice(-day));
     })
     app.on("getNotes", async (response) => {
@@ -57,7 +59,8 @@ export function socket(app) {
 
         let modules = [];
 
-        let json = await getAllNoteInProfile(response.locals.email, app.cookie);
+        if (response.email === undefined) return app.emit("getNotes", {"error": "bad argument"});
+        let json = await getAllNoteInProfile(response.email, app.cookie);
         json["modules"].forEach((module, index) => {
             let content = {
                 scholarYear: module["scolaryear"],
@@ -94,7 +97,8 @@ export function socket(app) {
             "medal": []
         };
 
-        let json = await getAllFlagsInProfile(response.locals.email, response.cookie);
+        if (response.email === undefined) return app.emit("getFlags", {"error": "bad argument"});
+        let json = await getAllFlagsInProfile(response.email, response.cookie);
         json["flags"]["ghost"]["modules"].forEach((module, index) => {
             flags.ghost.push({
                 scholarYear: module["scolaryear"],
@@ -149,6 +153,7 @@ export function socket(app) {
         let timestamp = Date.now();
 
         if (parameter === undefined) return app.emit("getAbsences", {"error": "bad parameter"});
+        if (response.email === undefined) return app.emit("getAbsences", {"error": "bad argument"});
 
         switch (parameter) {
             case "year":
@@ -161,7 +166,7 @@ export function socket(app) {
                 timestamp -= 7 * 1440 * 60000
                 break;
         }
-        let json = await getAllMissedInProfile(response.locals.email, response.cookie);
+        let json = await getAllMissedInProfile(response.email, response.cookie);
         for (const key in json) {
             json[key].forEach((absence, index) => {
                 let time = new Date(absence["begin"])
@@ -196,7 +201,8 @@ export function socket(app) {
         if (!isValidObject(app, response, true)) return app.emit("getDocuments", {"error": "you must be logged in"});
         let documents = [];
 
-        let json = await getAllDocumentsInProfile(response.locals.email, response.cookie);
+        if (response.email === undefined) return app.emit("getDocuments", {"error": "bad argument"});
+        let json = await getAllDocumentsInProfile(response.email, response.cookie);
         json.forEach((document, index) => {
             documents.push({
                 title: document["title"],
