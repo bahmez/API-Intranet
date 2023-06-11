@@ -56,11 +56,8 @@ getJam -> command to see jam activities\
 Catégorie anglais :
 
 
-getTepitechResults -> command to retrive all Tepitech results with complete informations (distribution of points)\
-getLastTepitechResult -> command to get last Tepitech result\
-getTepitechGoal -> command to get the goal of the Tepitech score\
+getTepitech -> command to retrive all Tepitech results with complete informations (distribution of points)\
 getEnglishModules -> command to retrive all modules of english of the year\
-getEnglishModuleProjects -> command to retrieve all projects available in the english module\
 getEnglishActivities -> command to retrieve all english activities
 
 
