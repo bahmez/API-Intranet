@@ -1,0 +1,10 @@
+[Unit]
+Description=intranetAPI
+
+[Service]
+Environment=PATH=/usr/local/bin:/usr/sbin:/usr/local/sbin:/bin:/sbin
+Environment=PORT=3000
+ExecStart=node server.js
+User={{ remote_user }}
+WorkingDirectory=/var/www/intranet/api
+Restart=always
