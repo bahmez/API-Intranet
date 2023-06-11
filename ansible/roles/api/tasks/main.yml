@@ -1,0 +1,35 @@
+- name: create directory result
+  file:
+    path: /var/www/intranet/api
+    state: directory
+
+- name: unarchive api.tar
+  unarchive:
+    src: api.tar
+    dest: /var/www/intranet/api/
+    extra_opts: [--strip-components=1]
+
+- name: install node
+  apt:
+    name: nodejs
+    state: present
+
+- name: install npm
+  apt:
+    name: npm
+    state: present
+
+- name: Install packages based on package.json
+  npm:
+    path: /var/www/intranet/api/
+
+- name: Template service
+  template:
+    src: templates/intranetAPI.j2
+    dest: /etc/systemd/system/intranetAPI.service
+    mode: '0644'
+
+- name: Start service result, if not started
+  service:
+    name: intranetAPI.service
+    state: started

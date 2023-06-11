@@ -1,0 +1,5 @@
+- hosts: api
+  become: true
+  roles:
+    - base
+    - api
