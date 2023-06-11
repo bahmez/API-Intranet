@@ -1,4 +1,5 @@
 import {getAlert, getWall} from "../model/notifications.js";
+import {isValidObject} from "../utils/isValidObject.js";
 
 function removeTags(str) {
     if ((str===null) || (str===''))
@@ -6,6 +7,32 @@ function removeTags(str) {
     else
         str = str.toString();
     return str.replace( /(<([^>]+)>)/ig, '');
+}
+
+export function socket(app) {
+    app.on("getNotifications", async (response) => {
+        if (!isValidObject(app, response, true)) return app.emit("getNotifications", {"error": "you must be logged in"});
+
+        let messages = [];
+
+        let json = await getWall(app.cookie);
+        json["history"].forEach((message) => {
+            messages.push({
+                type: message["class"],
+                content: removeTags(message["content"]),
+                date: message["date"],
+                id: message["id"],
+                idActivity: message["id_activite"],
+                title: removeTags(message["title"]),
+                user: {
+                    picture: "https://intra.epitech.eu" + message["user"]["picture"],
+                    fullname: message["user"]["title"]
+                },
+                isVisible: message["visible"]
+            })
+        })
+        return app.emit("getNotifications", messages);
+    })
 }
 
 export default function index(app) {
