@@ -44,14 +44,6 @@ Catégorie roadblock :
 
 
 getRoadblocks -> command to retrieve all roadblocks of the year\
-getRoadblockInfo -> command to retrieve informations about a roadblock\
-getRoadblockModules -> command to retrieve all modules of a roadblock\
-getValidatedRoadlock -> command to retrieve all roadblocks validated\
-getUnlockedRoadblocks -> command to retrieve the list of roadblocks still not unlocked\
-getRoadblockCreditsToGet -> command to see how many credits necessary for the roadblock validation\
-getRoadblockCreditsInProgress -> command to see how many credits are in progress in this roadblock\
-getRoadblockCreditsMissing -> command to see how many credits are missing to validate the roadblock\
-getRoadblockPossibleModules -> command to retrieve the list of modules that can help get the roadblock
 
 
 Catégorie hub :
