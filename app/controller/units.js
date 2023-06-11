@@ -1,5 +1,38 @@
 import {getAllModules, getModuleInformation, registerInModule, unregisterInModule} from "../model/module.js";
 
+export function socket(app) {
+    app.on("registerModule", async (response) => {
+        let cookies = response.cookie;
+        let year = response.year;
+        let codeModule = response.code_module;
+        let codeInstance = response.code_instance;
+        let json = {};
+
+        if (![year, codeModule, codeInstance].every((value) => value !== undefined)) return app.emit("registerModule", {"error": "bad/missing arguments"});
+        try {
+            json = await registerInModule(year, codeModule, codeInstance, cookies);
+        } catch (e) {
+            return app.emit("registerModule",{error: "invalid argument"})
+        }
+        return app.emit("registerModule", json)
+    })
+    app.on("unRegisterModule", async (response) => {
+        let cookies = response.cookie;
+        let year = response.year;
+        let codeModule = response.code_module;
+        let codeInstance = response.code_instance;
+        let json = {};
+
+        if (![year, codeModule, codeInstance].every((value) => value !== undefined)) return app.emit("unRegisterModule", {"error": "bad/missing arguments"});
+        try {
+            json = await unregisterInModule(year, codeModule, codeInstance, cookies);
+        } catch (e) {
+            return app.emit("unRegisterModule",{error: "invalid argument"})
+        }
+        return app.emit("unRegisterModule", json)
+    })
+}
+
 export default function index(app) {
     app.get('/units', async (request, response) => {
         let cookies = request.headers.cookie;
