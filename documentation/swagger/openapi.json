@@ -1,0 +1,658 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Intra API Documentation",
+    "description": "Welcome to the API Documentation for the Intra application. This API provides a set of endpoints to interact with various features of the application. Below are the different categories and their corresponding endpoints:\n"
+  },
+  "servers": [
+    {
+      "url": "https://le-lien-de-lapi"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Login",
+      "description": "Endpoints related to user login"
+    },
+    {
+      "name": "Profil",
+      "description": "Endpoints related to user profile information"
+    },
+    {
+      "name": "Units",
+      "description": "Endpoints related to user units"
+    },
+    {
+      "name": "Projects",
+      "description": "Endpoints related to projects"
+    },
+    {
+      "name": "Roadblock",
+      "description": "Endpoints related to roadblocks"
+    },
+    {
+      "name": "English",
+      "description": "Endpoints related to English projects"
+    },
+    {
+      "name": "Hub",
+      "description": "Endpoints related to hub data"
+    },
+    {
+      "name": "E-Learning",
+      "description": "Endpoints related to e-learning data"
+    },
+    {
+      "name": "Administration",
+      "description": "Endpoints related to administration data"
+    },
+    {
+      "name": "Notifications",
+      "description": "Endpoints related to notifications"
+    },
+    {
+      "name": "Planning",
+      "description": "Endpoints related to planning data"
+    }
+  ],
+  "paths": {
+    "/LOGIN/START": {
+      "get": {
+        "summary": "Start login sessions",
+        "description": "Initiates the login session for the user.",
+        "tags": [
+          "Login"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/LOGIN/STATUS": {
+      "get": {
+        "summary": "Get login session status",
+        "description": "Retrieves the status of the login session.",
+        "tags": [
+          "Login"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/LOGIN/PHONE/{CODE}": {
+      "get": {
+        "summary": "Send login phone code",
+        "description": "Sends the phone code for login verification.",
+        "tags": [
+          "Login"
+        ],
+        "parameters": [
+          {
+            "name": "CODE",
+            "in": "path",
+            "description": "The login phone code.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/USER": {
+      "get": {
+        "summary": "Get user details",
+        "description": "Retrieves the username, email, promotion, year of study, track, and location of a user from its ID.",
+        "tags": [
+          "Profil"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/USER/AVAILABLE_CREDITS": {
+      "get": {
+        "summary": "Get available credits",
+        "description": "Retrieves the number of available credits of the user for this year.",
+        "tags": [
+          "Profil"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/USER/CREDITS": {
+      "get": {
+        "summary": "Get credits",
+        "description": "Retrieves the number of credits of the user for this year.",
+        "tags": [
+          "Profil"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/USER/GPA": {
+      "get": {
+        "summary": "Get GPA",
+        "description": "Retrieves the GPA of the user.",
+        "tags": [
+          "Profil"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/USER/NETSOUL/{PARAMETERS}": {
+      "get": {
+        "summary": "Get Netsoul information",
+        "description": "Retrieves the information related to the logtime of the user.",
+        "tags": [
+          "Profil"
+        ],
+        "parameters": [
+          {
+            "name": "PARAMETERS",
+            "in": "path",
+            "description": "The parameters for Netsoul information.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/UNITS/{ID}": {
+      "get": {
+        "summary": "Get unit details",
+        "description": "Retrieves the details of a specific unit.",
+        "tags": [
+          "Units"
+        ],
+        "parameters": [
+          {
+            "name": "ID",
+            "in": "path",
+            "description": "The ID of the unit.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/UNITS/{ID}/REGISTER": {
+      "get": {
+        "summary": "Register for a unit",
+        "description": "Registers the user for a specific unit.",
+        "tags": [
+          "Units"
+        ],
+        "parameters": [
+          {
+            "name": "ID",
+            "in": "path",
+            "description": "The ID of the unit.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/UNITS/{ID}/UNREGISTER": {
+      "get": {
+        "summary": "Unregister from a unit",
+        "description": "Unregisters the user from a specific unit.",
+        "tags": [
+          "Units"
+        ],
+        "parameters": [
+          {
+            "name": "ID",
+            "in": "path",
+            "description": "The ID of the unit.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/USER/UNITS/{PARAMETERS}": {
+      "get": {
+        "summary": "Get projects",
+        "description": "Retrieves all the projects of a user.",
+        "tags": [
+          "Projects"
+        ],
+        "parameters": [
+          {
+            "name": "PARAMETERS",
+            "in": "path",
+            "description": "The parameters for project retrieval.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Current",
+                "All time",
+                "Year"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/PROJECTS/{ID}": {
+      "get": {
+        "summary": "Get project details",
+        "description": "Retrieves the details of a specific project.",
+        "tags": [
+          "Projects"
+        ],
+        "parameters": [
+          {
+            "name": "ID",
+            "in": "path",
+            "description": "The ID of the project.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/PROJECTS/{ID}/REGISTER": {
+      "post": {
+        "summary": "Register for a project",
+        "description": "Registers the user for a specific project.",
+        "tags": [
+          "Projects"
+        ],
+        "parameters": [
+          {
+            "name": "ID",
+            "in": "path",
+            "description": "The ID of the project.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/PROJECTS/{ID}/UNREGISTER": {
+      "get": {
+        "summary": "Unregister from a project",
+        "description": "Unregisters the user from a specific project.",
+        "tags": [
+          "Projects"
+        ],
+        "parameters": [
+          {
+            "name": "ID",
+            "in": "path",
+            "description": "The ID of the project.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/ROADBLOCKS/{PARAMETERS}": {
+      "get": {
+        "summary": "Get roadblocks",
+        "description": "Retrieves roadblocks based on the specified parameters.",
+        "tags": [
+          "Roadblock"
+        ],
+        "parameters": [
+          {
+            "name": "PARAMETERS",
+            "in": "path",
+            "description": "The parameters for roadblock retrieval. Valid values are 'Completed', 'NotCompleted', or 'Year'.",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Completed",
+                "NotCompleted",
+                "Year"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/ROADBLOCKS/{ID}": {
+      "get": {
+        "summary": "Get roadblock details",
+        "description": "Retrieves the details of a specific roadblock.",
+        "tags": [
+          "Roadblock"
+        ],
+        "parameters": [
+          {
+            "name": "ID",
+            "in": "path",
+            "description": "The ID of the roadblock.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/TEPITEK/{PARAMETERS}": {
+      "get": {
+        "summary": "Get Tepiteks results",
+        "description": "Retrieves the Tepiteks results of a user based on the specified parameters.",
+        "tags": [
+          "English"
+        ],
+        "parameters": [
+          {
+            "name": "PARAMETERS",
+            "in": "path",
+            "description": "The parameters for Tepiteks results retrieval. Valid values are 'Year' or 'Last'.",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Year",
+                "Last"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/ENGLISH/": {
+      "get": {
+        "summary": "Get English units",
+        "description": "Retrieves all currently available English units.",
+        "tags": [
+          "English"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/ENGLISH/PROJECTS/{ID}": {
+      "get": {
+        "summary": "Get English projects",
+        "description": "Retrieves the currently available projects of an English unit.",
+        "tags": [
+          "English"
+        ],
+        "parameters": [
+          {
+            "name": "ID",
+            "in": "path",
+            "description": "The ID of the English unit.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/HUB/XP": {
+      "get": {
+        "summary": "Get XP details",
+        "description": "Retrieves the XP details of a user (goal, current XP).",
+        "tags": [
+          "Hub"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/HUB/JAM": {
+      "get": {
+        "summary": "Get JAM results",
+        "description": "Retrieves the JAM results of a user.",
+        "tags": [
+          "Hub"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/VIDEOS/{PARAMETERS}": {
+      "get": {
+        "summary": "Get E-Learning videos with parameters",
+        "description": "Retrieves the videos of the E-Learning platform based on the specified parameters.",
+        "tags": [
+          "E-Learning"
+        ],
+        "parameters": [
+          {
+            "name": "PARAMETERS",
+            "in": "path",
+            "description": "Optional parameters for filtering the videos.",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Year",
+                "Month; Module",
+                "Project"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/PUBLIC_DOCUMENTS": {
+      "get": {
+        "summary": "Get public documents",
+        "description": "Retrieves the public documents of the administration tab.",
+        "tags": [
+          "Administration"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/NOTIFICATIONS/{PARAMETERS}": {
+      "get": {
+        "summary": "Get notifications",
+        "description": "Retrieves the notifications of a user.",
+        "tags": [
+          "Notifications"
+        ],
+        "parameters": [
+          {
+            "name": "PARAMETERS",
+            "in": "path",
+            "description": "Optional parameters for filtering notifications.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/ALERT": {
+      "get": {
+        "summary": "Get alert",
+        "description": "Retrieves the alert of the user.",
+        "tags": [
+          "Notifications"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/PLANNING/{START}/{END}": {
+      "get": {
+        "summary": "Get planning data",
+        "description": "Retrieves the planning data within a specified time frame.",
+        "tags": [
+          "Planning"
+        ],
+        "parameters": [
+          {
+            "name": "START",
+            "in": "path",
+            "description": "The start date of the planning period.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "END",
+            "in": "path",
+            "description": "The end date of the planning period.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "APIKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "API-Key",
+        "description": "Provide your API key as a header parameter. You can obtain the API key by authenticating with the application.\n"
+      }
+    }
+  },
+  "security": [
+    {
+      "APIKeyAuth": []
+    }
+  ]
+}
