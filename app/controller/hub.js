@@ -33,6 +33,7 @@ export function socket(app) {
     app.on("getHubXP", async (response) => {
         if (!isValidObject(app, response, true)) return app.emit("getHubXP", {"error": "you must be logged in"});
         let year = response.year;
+        if (year === undefined) return app.emit("getHubXP", {"error": "missing parameter"});
 
         let json = await getAllActivityHubByYear(year, app.cookie);
         let profile = await getProfile(app.cookie);
@@ -66,8 +67,9 @@ export function socket(app) {
             }
         }
         let currentYear = profile.studentyear - (parseInt(profile.scolaryear) - year);
-        let jsonNotes = await getAllNoteInProfile(profile.internal_email, cookies);
+        let jsonNotes = await getAllNoteInProfile(profile.internal_email, app.cookie);
         const currentHubName = 'B' + currentYear * 2 + " - Hub";
+        console.log(currentHubName);
         let currentHub = jsonNotes.modules.filter(module => module.title === currentHubName);
         let xpGoal = (currentHub) ? currentHub[0].credits : 0;
 

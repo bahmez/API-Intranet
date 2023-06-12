@@ -11,9 +11,9 @@ export function socket(app) {
 
         if (year === undefined) return app.emit("getRoadblocks", {"error": "bad argument"});
 
-        let roadblocks = await getAllRoadBlockByYear(year, response.cookie);
+        let roadblocks = await getAllRoadBlockByYear(year, app.cookie);
         let results = [];
-        let modules = await getAllModules(response.cookie);
+        let modules = await getAllModules(app.cookie);
 
         roadblocks.forEach((roadblock) => {
             let result = {
@@ -97,7 +97,6 @@ export default function index(app) {
         let results = [];
         let modules = await getAllModules(cookies);
 
-        console.log(roadblocks)
         roadblocks.forEach((roadblock) => {
             let result = {
                 scholarYear: roadblock.scolaryear,

@@ -77,3 +77,9 @@ Catégorie notification :
 
 
 getNotifications -> command that leads to a page where all the notifications are filled in
+
+Catégorie myEpitech :
+
+getAllResults -> command to see all the results of your year given in argument\
+getDetailsResult -> command to see the details of the results with the id of the result given in argument\
+getAllResultsProject -> command to see all the results of the project given in argument\

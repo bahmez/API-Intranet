@@ -11,13 +11,14 @@ export function socket(app) {
     app.on("getGPA", async (response) => {
         if (!isValidObject(app, response, true)) return app.emit("getGPA", {"error": "you must be logged in"});
 
-        let json = await getProfile(response.cookie);
+        let json = await getProfile(app.cookie);
+        console.log(json);
         app.emit("getGPA", json["gpa"][0]["gpa"]);
     })
     app.on("getActualCredits", async (response) => {
         if (!isValidObject(app, response, true)) return app.emit("getActualCredits", {"error": "you must be logged in"});
 
-        let json = await getProfile(response.cookie);
+        let json = await getProfile(app.cookie);
         app.emit("getActualCredits", json["credits"]);
     })
     app.on("getAvailableCredits", async (response) => {
@@ -25,7 +26,7 @@ export function socket(app) {
         let availableCredits = 0;
 
         if (response.email === undefined) return app.emit("getAvailableCredits", {"error": "bad argument"});
-        let json = await getAllNoteInProfile(response.email, response.cookie);
+        let json = await getAllNoteInProfile(response.email, app.cookie);
         json["modules"].forEach((module, index) => {
             if (module["grade"] !== '-')
                 return;
@@ -98,7 +99,7 @@ export function socket(app) {
         };
 
         if (response.email === undefined) return app.emit("getFlags", {"error": "bad argument"});
-        let json = await getAllFlagsInProfile(response.email, response.cookie);
+        let json = await getAllFlagsInProfile(response.email, app.cookie);
         json["flags"]["ghost"]["modules"].forEach((module, index) => {
             flags.ghost.push({
                 scholarYear: module["scolaryear"],
@@ -166,7 +167,7 @@ export function socket(app) {
                 timestamp -= 7 * 1440 * 60000
                 break;
         }
-        let json = await getAllMissedInProfile(response.email, response.cookie);
+        let json = await getAllMissedInProfile(response.email, app.cookie);
         for (const key in json) {
             json[key].forEach((absence, index) => {
                 let time = new Date(absence["begin"])
@@ -202,7 +203,7 @@ export function socket(app) {
         let documents = [];
 
         if (response.email === undefined) return app.emit("getDocuments", {"error": "bad argument"});
-        let json = await getAllDocumentsInProfile(response.email, response.cookie);
+        let json = await getAllDocumentsInProfile(response.email, app.cookie);
         json.forEach((document, index) => {
             documents.push({
                 title: document["title"],

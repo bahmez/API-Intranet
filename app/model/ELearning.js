@@ -7,7 +7,7 @@ export async function getELearning(cookie) {
         }
     };
     const result = await fetch("https://intra.epitech.eu/e-learning/?format=json", opts)
-    if (result.statusCode >= 400)
-        throw "error code : " + result.statusCode;
+    if (result.status >= 400)
+        throw "error code : " + result.status;
     return result.json();
 }

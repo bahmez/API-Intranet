@@ -5,7 +5,7 @@ export function socket(app) {
     app.on("registerModule", async (response) => {
         if (!isValidObject(app, response, true)) return app.emit("registerModule", {"error": "you must be logged in"});
 
-        let cookies = response.cookie;
+        let cookies = app.cookie;
         let year = response.year;
         let codeModule = response.code_module;
         let codeInstance = response.code_instance;
@@ -22,7 +22,7 @@ export function socket(app) {
     app.on("unRegisterModule", async (response) => {
         if (!isValidObject(app, response, true)) return app.emit("unRegisterModule", {"error": "you must be logged in"});
 
-        let cookies = response.cookie;
+        let cookies = app.cookie;
         let year = response.year;
         let codeModule = response.code_module;
         let codeInstance = response.code_instance;

@@ -8,7 +8,7 @@ export async function getResults(year, token) {
     };
     const result = await fetch("https://api.epitest.eu/me/" + year, opts)
     if (result.status >= 400)
-        throw "error code : " + result.statusCode;
+        throw "error code : " + result.status;
     let content = await result.text();
     if (content === "" || content === undefined || content === "[]")
         return {};
@@ -25,7 +25,7 @@ export async function getDetailResult(id, token) {
     };
     const result = await fetch("https://api.epitest.eu/me/details/" + id, opts)
     if (result.status >= 400)
-        throw "error code : " + result.statusCode;
+        throw "error code : " + result.status;
     let content = await result.text();
     if (content === "" || content === undefined || content === "[]")
         return {};
@@ -42,7 +42,7 @@ export async function getProjectResult(year, moduleName, projectName, token) {
     };
     const result = await fetch("https://api.epitest.eu/me/" + year + "/" + moduleName + "/" + projectName, opts)
     if (result.status >= 400)
-        throw "error code : " + result.statusCode;
+        throw "error code : " + result.status;
     let content = await result.text();
     if (content === "" || content === undefined || content === "[]")
         return {};

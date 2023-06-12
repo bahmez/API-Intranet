@@ -7,8 +7,8 @@ export async function getWall(cookie) {
         }
     };
     const result = await fetch("https://intra.epitech.eu/wall?format=json", opts)
-    if (result.statusCode >= 400)
-        throw "error code : " + result.statusCode;
+    if (result.status >= 400)
+        throw "error code : " + result.status;
     return result.json();
 }
 
@@ -21,8 +21,8 @@ export async function getMessage(cookie) {
         }
     };
     const result = await fetch("https://intra.epitech.eu/user/notification/message?format=json", opts)
-    if (result.statusCode >= 400)
-        throw "error code : " + result.statusCode;
+    if (result.status >= 400)
+        throw "error code : " + result.status;
     return result.json();
 }
 
@@ -35,8 +35,8 @@ export async function getAlert(cookie) {
         }
     };
     const result = await fetch("https://intra.epitech.eu/user/alert?format=json", opts)
-    if (result.statusCode >= 400)
-        throw "error code : " + result.statusCode;
+    if (result.status >= 400)
+        throw "error code : " + result.status;
     return result.json();
 }
 
@@ -49,7 +49,7 @@ export async function getComing(cookie) {
         }
     };
     const result = await fetch("https://intra.epitech.eu/user/notification/coming?format=json", opts)
-    if (result.statusCode >= 400)
-        throw "error code : " + result.statusCode;
+    if (result.status >= 400)
+        throw "error code : " + result.status;
     return result.json();
 }

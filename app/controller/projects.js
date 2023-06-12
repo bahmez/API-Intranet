@@ -50,56 +50,81 @@ export function socket(app) {
         let year = response.year;
         let codeModule = response.code_module;
         let codeInstance = response.code_instance;
-        let codeActivity = response.code_activity;
-        let activity = {};
-
-        if (![year, codeModule, codeInstance, codeActivity].every((value) => value !== undefined)) return app.emit("getModuleInfo", {"error": "bad/missing arguments"});
+        let json = {};
 
         try {
-            activity = await getActivity(year, codeModule, codeInstance, codeActivity, app.cookie);
+            json = await getModuleInformation(year, codeModule, codeInstance, app.cookie);
         } catch (e) {
-            return app.emit("getModuleInfo", {"error": "bad/missing arguments"});
+            return app.emit("getModuleInfo", {error: "invalid argument"})
         }
-        let project = null;
-        let events = [];
+        let managers = [];
+        let activities = [];
 
-        if (activity["project"] !== null)
-            project = {
-                id: activity["id"],
-                scholarYear: activity["scolaryear"],
-                codeModule: activity["codemodule"],
-                codeInstance: activity["codeInstance"],
-                title: activity["title"]
-            };
-        activity["events"].forEach((event, index) => {
-            events.push({
-                code: event["code"],
-                seats: event["seats"],
-                title: event["title"],
-                description: event["description"],
-                beginDate: event["begin"],
-                endDate: event["end"],
-                location: event["location"],
+        json["resp"].forEach((manager, index) => {
+            managers.push({
+                email: manager["login"],
+                fullname: manager["title"],
+                picture: "https://intra.epitech.eu" + manager["picture"]
+            })
+        })
+        json["activites"].forEach((activity, index) => {
+            let project = null;
+            let events = [];
+
+            if (activity["project"] !== null)
+                project = {
+                    id: activity["id"],
+                    scholarYear: activity["scolaryear"],
+                    codeModule: activity["codemodule"],
+                    codeInstance: activity["codeInstance"],
+                    title: activity["title"]
+                };
+            activity["events"].forEach((event, index) => {
+                events.push({
+                    code: event["code"],
+                    seats: event["seats"],
+                    title: event["title"],
+                    description: event["description"],
+                    beginDate: event["begin"],
+                    endDate: event["end"],
+                    location: event["location"],
+                })
+            })
+            activities.push({
+                codeActivity: activity["codeacti"],
+                title: activity["title"],
+                description: activity["description"],
+                typeTitle: activity["type_title"],
+                typeCode: activity["type_code"],
+                beginDate: activity["begin"],
+                startDate: activity["start"],
+                endRegisterDate: activity["end_register"],
+                deadline: activity["deadline"],
+                endDate: activity["end"],
+                numberHours: activity["nb_hours"],
+                isProject: activity["is_projet"],
+                idProject: activity["id_projet"],
+                titleProject: activity["project_title"],
+                isNote: activity["is_note"],
+                project,
+                events
             })
         })
         app.emit("getModuleInfo", {
-            codeActivity: activity["codeacti"],
-            title: activity["title"],
-            description: activity["description"],
-            typeTitle: activity["type_title"],
-            typeCode: activity["type_code"],
-            beginDate: activity["begin"],
-            startDate: activity["start"],
-            endRegisterDate: activity["end_register"],
-            deadline: activity["deadline"],
-            endDate: activity["end"],
-            numberHours: activity["nb_hours"],
-            isProject: activity["is_projet"],
-            idProject: activity["id_projet"],
-            titleProject: activity["project_title"],
-            isNote: activity["is_note"],
-            project,
-            events
+            scholarYear: json["scolaryear"],
+            codeModule: json["codemodule"],
+            codeInstance: json["codeInstance"],
+            semester: json["semester"],
+            title: json["title"],
+            beginDate: json["begin"],
+            endRegisterDate: json["end_register"],
+            endDate: json["end"],
+            credits: json["credits"],
+            description: json["description"],
+            competence: json["competence"],
+            managers,
+            allowRegister: json["allow_register"],
+            activities
         });
     })
     app.on("getProjects", async (response) => {
@@ -163,7 +188,7 @@ export function socket(app) {
     app.on("getProjectInfo", async (response) => {
         if (!isValidObject(app, response, true)) return app.emit("getProjectInfo", {"error": "you must be logged in"});
 
-        let cookies = response.cookie;
+        let cookies = app.cookie;
         let year = response.year;
         let codeModule = response.code_module;
         let codeInstance = response.code_instance;
