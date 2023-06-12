@@ -11,7 +11,7 @@ export async function getAdminFile(cookie, path = undefined) {
         result = await fetch("https://intra.epitech.eu/file/?format=json", opts)
     else
         result = await fetch("https://intra.epitech.eu/file/" + path + "/?format=json", opts)
-    if (result.statusCode >= 400)
-        throw "error code : " + result.statusCode;
+    if (result.status >= 400)
+        throw "error code : " + result.status;
     return result.json();
 }

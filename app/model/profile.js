@@ -7,8 +7,8 @@ export async function getProfile(cookie) {
         }
     };
     const result = await fetch("https://intra.epitech.eu/user/?format=json", opts)
-    if (result.statusCode >= 400)
-        throw "error code : " + result.statusCode;
+    if (result.status >= 400)
+        throw "error code : " + result.status;
     return result.json();
 }
 
@@ -21,8 +21,8 @@ export async function getAllNoteInProfile(email, cookie) {
         }
     };
     const result = await fetch("https://intra.epitech.eu/user/" + email + "/notes/?format=json", opts)
-    if (result.statusCode >= 400)
-        throw "error code : " + result.statusCode;
+    if (result.status >= 400)
+        throw "error code : " + result.status;
     return result.json();
 }
 
@@ -35,8 +35,8 @@ export async function getAllFlagsInProfile(email, cookie) {
         }
     };
     const result = await fetch("https://intra.epitech.eu/user/" + email + "/flags/?format=json", opts)
-    if (result.statusCode >= 400)
-        throw "error code : " + result.statusCode;
+    if (result.status >= 400)
+        throw "error code : " + result.status;
     return result.json();
 }
 
@@ -49,8 +49,8 @@ export async function getAllBinomeInProfile(email, cookie) {
         }
     };
     const result = await fetch("https://intra.epitech.eu/user/" + email + "/binome/?format=json", opts)
-    if (result.statusCode >= 400)
-        throw "error code : " + result.statusCode;
+    if (result.status >= 400)
+        throw "error code : " + result.status;
     return result.json();
 }
 
@@ -63,8 +63,8 @@ export async function getAllMissedInProfile(email, cookie) {
         }
     };
     const result = await fetch("https://intra.epitech.eu/user/" + email + "/notification/missed/?format=json", opts)
-    if (result.statusCode >= 400)
-        throw "error code : " + result.statusCode;
+    if (result.status >= 400)
+        throw "error code : " + result.status;
     return result.json();
 }
 
@@ -77,8 +77,8 @@ export async function getAllDocumentsInProfile(email, cookie) {
         }
     };
     const result = await fetch("https://intra.epitech.eu/user/" + email + "/document/?format=json", opts)
-    if (result.statusCode >= 400)
-        throw "error code : " + result.statusCode;
+    if (result.status >= 400)
+        throw "error code : " + result.status;
     return result.json();
 }
 
@@ -91,7 +91,7 @@ export async function getNetsoulInProfile(email, cookie) {
         }
     };
     const result = await fetch("https://intra.epitech.eu/user/" + email + "/netsoul/?format=json", opts)
-    if (result.statusCode >= 400)
-        throw "error code : " + result.statusCode;
+    if (result.status >= 400)
+        throw "error code : " + result.status;
     return result.json();
 }
