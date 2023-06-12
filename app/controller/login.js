@@ -66,6 +66,8 @@ export function socket(app) {
                     app.login = {code: 401, response};
             } else if ("valid" in response) {
                 app.login = {code: 200, ...response};
+                app.token = "bearer " + response.token;
+                app.cookie = "user=" + response.cookie[0]["value"];
             } else {
                 app.login = {code: 400, response};
             }
