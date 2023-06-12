@@ -6,7 +6,6 @@ import {isValidObject} from "../utils/isValidObject.js";
 export function socket(app) {
     app.on("getTepitech", async (response) => {
         if (!isValidObject(app, response, true)) return app.emit("getTepitech", {"error": "you must be logged in"});
-
         let year = response.year;
         let tepiteks = [];
 
