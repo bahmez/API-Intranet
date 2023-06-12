@@ -97,7 +97,6 @@ export default function index(app) {
         let results = [];
         let modules = await getAllModules(cookies);
 
-        console.log(roadblocks)
         roadblocks.forEach((roadblock) => {
             let result = {
                 scholarYear: roadblock.scolaryear,
