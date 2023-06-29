@@ -35,7 +35,7 @@ export async function getAllFlagsInProfile(email, cookie) {
         }
     };
     const result = await fetch("https://intra.epitech.eu/user/" + email + "/flags/?format=json", opts)
-    if (result.status >= 400)
+    if (result.status >= 400 && result.status !== 500)
         throw "error code : " + result.status;
     return result.json();
 }
